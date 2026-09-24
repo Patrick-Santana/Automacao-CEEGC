@@ -1,0 +1,29 @@
+# .gitignore
+__pycache__/
+*.pyc
+*.pyo
+.env
+.venv/
+env/
+venv/
+
+# Dados
+data/input/uploads/*
+data/output/relatorios/*
+data/output/logs/*
+!data/**/.gitkeep
+
+# Imagens das fiscalizações
+assets/fotos_nao_conformidades/*
+assets/fotos_condicoes_gerais/*
+!assets/**/.gitkeep
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+.DS_Store
+
+# Templates Word (grandes)
+*.docx
+!assets/templates/*.docx
