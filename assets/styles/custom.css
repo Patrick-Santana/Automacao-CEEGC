@@ -1,0 +1,75 @@
+:root {
+    --azul-pe: #001F54;
+    --azul-pe-claro: #003B80;
+    --branco: #FFFFFF;
+    --amarelo-pe: #FFD100;
+    --cinza-claro: #F5F7FA;
+}
+
+.stApp {
+    background-color: var(--branco);
+}
+
+[data-testid="stSidebar"] {
+    background: linear-gradient(180deg, var(--azul-pe) 0%, var(--azul-pe-claro) 100%);
+    color: var(--branco);
+}
+[data-testid="stSidebar"] * {
+    color: var(--branco) !important;
+}
+[data-testid="stSidebar"] .stRadio label:hover {
+    background-color: rgba(255,255,255,0.1);
+    border-radius: 6px;
+    padding: 4px 8px;
+}
+
+h1, h2, h3 {
+    color: var(--azul-pe) !important;
+}
+
+div.stButton > button {
+    background-color: var(--azul-pe);
+    color: var(--branco);
+    border: none;
+    border-radius: 8px;
+    padding: 0.6rem 1.5rem;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+div.stButton > button:hover {
+    background-color: var(--azul-pe-claro);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,31,84,0.3);
+}
+div.stButton > button[kind="primary"] {
+    background-color: var(--azul-pe);
+    border: 2px solid var(--amarelo-pe);
+}
+
+[data-testid="stMetricValue"] {
+    color: var(--azul-pe);
+    font-weight: 700;
+}
+
+[data-testid="stDataFrame"] {
+    border: 1px solid var(--azul-pe);
+    border-radius: 8px;
+}
+
+.stTabs [data-baseweb="tab-list"] button[aria-selected="true"] {
+    color: var(--azul-pe);
+    border-bottom: 3px solid var(--azul-pe);
+}
+
+[data-testid="stExpander"] {
+    border: 1px solid var(--azul-pe);
+    border-radius: 10px;
+}
+
+.stAlert {
+    border-left: 5px solid var(--azul-pe);
+}
+
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: var(--cinza-claro); }
+::-webkit-scrollbar-thumb { background: var(--azul-pe); border-radius: 5px; }
