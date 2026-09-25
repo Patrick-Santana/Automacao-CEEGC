@@ -2,7 +2,7 @@
 from dataclasses import dataclass, field
 from typing import List, Dict
 from models.fiscalizacao import Fiscalizacao
-from models.nao_conformidade import NaoConformidade
+from NaoConformidade import NaoConformidade
 
 @dataclass
 class Relatorio:
