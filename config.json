@@ -1,0 +1,41 @@
+{
+  "excel_path": "C:\\Users\\zonaa\\Downloads\\DadosFiscalização.xlsx",
+  "assets_dir": "C:\\Users\\zonaa\\Downloads\\arpe_relatorios_v2.1\\arpe_v2\\assets",
+  "saida_dir": "C:\\Users\\zonaa\\Downloads\\arpe_relatorios_v2.1\\arpe_v2\\saida",
+  "template_path": "C:\\Users\\zonaa\\Downloads\\arpe_relatorios_v2.1\\arpe_v2\\modelos\\Template.docx",
+  "meta_anual": {
+    "2025": 372,
+    "2026": 384
+  },
+  "meta_padrao": 372,
+  "total_municipios": 26,
+  "fundamentacao_artigo": "Art. 38",
+  "fundamentacao_inciso": "Inciso V",
+  "assinantes": [
+    {
+      "nome": "Adriano de Paula Santana",
+      "cargo": "Analista de Regulação",
+      "matricula": "3408787-04"
+    },
+    {
+      "nome": "Argemiro Alvarez Rivas",
+      "cargo": "Analista Suplementar de Regulação e Fiscalização",
+      "matricula": "1219413-03"
+    },
+    {
+      "nome": "Ernesto Oliveira de Melo",
+      "cargo": "Analista de Desenvolvimento",
+      "matricula": "2227916-04"
+    },
+    {
+      "nome": "Marta Rejane de Lima",
+      "cargo": "Analista Suplementar de Regulação e Fiscalização",
+      "matricula": "1831011-03"
+    }
+  ],
+  "incluir_condicoes_gerais": true,
+  "gerar_fotos_sinteticas": true,
+  "tema": "auto",
+  "ultimo_pa": "121545454",
+  "ultimo_sei": "1545421578"
+}

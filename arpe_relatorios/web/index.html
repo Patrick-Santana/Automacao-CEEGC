@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Relatórios de Fiscalização · ARPE</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<div class="app">
+  <header class="top">
+    <div class="titulo">
+      <h1>Dashboard de Fiscalizações</h1>
+      <p class="caminho" id="caminho">—</p>
+    </div>
+    <div class="acoes">
+      <label class="ano"><span>Ano:</span>
+        <span class="sel"><select id="ano"></select></span></label>
+      <button class="btn" id="btnPlanilha"><svg class="i"><use href="#i-file"/></svg>Abrir planilha…</button>
+      <button class="btn" id="btnAssets"><svg class="i"><use href="#i-folder"/></svg>Pasta de assets…</button>
+      <button class="btn primario" id="btnRecarregar"><svg class="i"><use href="#i-refresh"/></svg>Recarregar</button>
+    </div>
+  </header>
+
+  <div id="faixaErro" class="faixa erro" hidden></div>
+
+  <section id="faixaInicio" class="faixa inicio" hidden>
+    <div class="faixa-icone"><svg class="i"><use href="#i-flag"/></svg></div>
+    <div class="faixa-texto">
+      <strong>Primeira utilização: qual foi o último relatório já entregue?</strong>
+      <span>Assim o aplicativo propõe o mês certo como próximo relatório (e não janeiro de 2024). Tudo até o mês escolhido é tratado como histórico.</span>
+    </div>
+    <span class="sel"><select id="baselineSel"></select></span>
+    <button class="btn primario" id="btnBaseline">Confirmar</button>
+  </section>
+
+  <section class="kpis" id="kpis"></section>
+
+  <nav class="abas" id="abas" role="tablist">
+    <button role="tab" data-aba="geral" class="ativa">Visão geral</button>
+    <button role="tab" data-aba="seg">Segmentos e municípios</button>
+    <button role="tab" data-aba="nc">Não conformidades</button>
+    <button role="tab" data-aba="tab">Tabelas</button>
+    <button role="tab" data-aba="rel">Relatórios</button>
+  </nav>
+
+  <main class="painel">
+    <div class="aba" id="aba-geral">
+      <div class="grade2">
+        <div class="cartao"><h3 id="tMensal"></h3><div class="graf"><canvas id="cMensal"></canvas></div></div>
+        <div class="cartao"><h3>Evolução acumulada · meta × realizado</h3><div class="graf"><canvas id="cAcum"></canvas></div></div>
+      </div>
+    </div>
+    <div class="aba" id="aba-seg" hidden>
+      <div class="grade2">
+        <div class="cartao"><h3>Fiscalizações por segmento</h3><div class="graf"><canvas id="cSeg"></canvas></div></div>
+        <div class="cartao"><h3>Fiscalizações por município</h3><div class="graf alto"><canvas id="cMun"></canvas></div></div>
+      </div>
+    </div>
+    <div class="aba" id="aba-nc" hidden>
+      <div class="grade2">
+        <div class="cartao"><h3>Evolução das não conformidades</h3><div class="graf"><canvas id="cNC"></canvas></div></div>
+        <div class="cartao"><h3>Não conformidades mais frequentes</h3><div class="graf"><canvas id="cFreq"></canvas></div></div>
+      </div>
+    </div>
+    <div class="aba" id="aba-tab" hidden>
+      <div class="cartao">
+        <div class="linha-h"><h3 style="margin:0">Tabelas do Apêndice 2</h3><span class="sel"><select id="tabSel"></select></span></div>
+        <div class="rolagem" id="tabela"></div>
+      </div>
+    </div>
+    <div class="aba" id="aba-rel" hidden>
+      <div class="proximo" id="proximo"></div>
+      <div id="avisos"></div>
+      <div class="cartao">
+        <div class="linha-h"><h3 style="margin:0">Histórico de períodos</h3>
+          <label class="ano"><span>Ano:</span><span class="sel"><select id="filtroAno"></select></span></label></div>
+        <div class="rolagem"><table class="lista" id="listaPeriodos"></table></div>
+      </div>
+      <div class="cartao config">
+        <h3>Configurações</h3>
+        <div class="campos">
+          <label>Pasta de saída<span class="campo"><input id="cfgSaida" readonly><button class="btn pq" data-pasta="saida">Alterar…</button></span></label>
+          <label>Template do relatório (.docx)<span class="campo"><input id="cfgTemplate" readonly><button class="btn pq" id="btnTemplate">Alterar…</button></span></label>
+          <label>Último mês entregue (baseline)<span class="campo"><span class="sel"><select id="cfgBaseline"></select></span><button class="btn pq" id="btnBaseline2">Aplicar</button></span></label>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- diálogo de geração -->
+<div class="veu" id="veu" hidden>
+  <div class="dialogo" role="dialog" aria-modal="true">
+    <div class="dialogo-topo">
+      <div class="faixa-icone"><svg class="i"><use href="#i-doc"/></svg></div>
+      <div><h2 id="dlgTitulo">Gerar relatório</h2><p id="dlgSub"></p></div>
+    </div>
+    <div class="dlg-resumo" id="dlgResumo"></div>
+    <div class="campos dois">
+      <label>Nº do PA<input id="dlgPA" placeholder="ex.: 05 (vazio = preencher no Word)"></label>
+      <label>Nº SEI<input id="dlgSEI" placeholder="ex.: 0012345.000012/2026-11"></label>
+    </div>
+    <label class="chk"><input type="checkbox" id="dlgSint"><span>Usar fotos sintéticas ilustrativas quando faltar foto real</span></label>
+    <label class="chk"><input type="checkbox" id="dlgGerais"><span>Incluir fotos de condições gerais no Apêndice 1</span></label>
+    <div id="dlgAviso" class="faixa aviso" hidden></div>
+    <div class="dialogo-rodape">
+      <button class="btn" id="dlgCancelar">Cancelar</button>
+      <button class="btn primario" id="dlgOk"><svg class="i"><use href="#i-doc"/></svg><span>Gerar relatório</span></button>
+    </div>
+  </div>
+</div>
+<div class="toast" id="toast" hidden></div>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="i-file" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></symbol>
+<symbol id="i-folder" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></symbol>
+<symbol id="i-refresh" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11a8 8 0 1 0-2.3 5.7"/><path d="M20 4v7h-7"/></symbol>
+<symbol id="i-target" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></symbol>
+<symbol id="i-brief" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18"/></symbol>
+<symbol id="i-trend" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></symbol>
+<symbol id="i-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></symbol>
+<symbol id="i-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l10 18H2z"/><path d="M12 10v5M12 18v.01"/></symbol>
+<symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+<symbol id="i-flag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21V4M5 4h11l-2 4 2 4H5"/></symbol>
+<symbol id="i-doc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></symbol>
+<symbol id="i-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"/></symbol>
+</defs></svg>
+<script src="vendor/chart.umd.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
