@@ -1,0 +1,18 @@
+[2026-11-04 09:52:41] v2.3.1 iniciando · exe=C:\Python314\python.exe · pasta=C:\Users\zonaa\Downloads\arpe_relatorios_v2.3.2\arpe_v2 · rede=False · dados=C:\Users\zonaa\Downloads\arpe_relatorios_v2.3.2\arpe_v2
+[2026-11-04 09:52:44] carga da planilha: C:\Users\zonaa\Downloads\arpe_relatorios_v2.3.2\arpe_v2\DadosFiscalização.xlsx
+[2026-11-04 09:52:44] FALHA na carga: FileNotFoundError: Planilha não encontrada: C:\Users\zonaa\Downloads\arpe_relatorios_v2.3.2\arpe_v2\DadosFiscalização.xlsx
+[2026-11-04 09:52:44] servidor local em http://127.0.0.1:63000/ (a planilha carrega em segundo plano)
+[2026-11-04 09:52:45] pywebview ? importado
+[2026-11-04 09:52:45] abrindo janela própria (pywebview)
+[2026-11-04 09:52:48] janela carregada
+[2026-11-04 09:59:51] carga da planilha: C:\Users\zonaa\Downloads\Acomp fisc TO 2026 Final.xlsx
+[2026-11-04 09:59:52] planilha carregada em 1.3s (1756 fiscalizações, 169 NC)
+[2026-11-05 08:34:47] encerrado
+[2026-11-05 10:32:27] v2.3.1 iniciando · exe=C:\Users\zonaa\Downloads\arpe_relatorios_v2.3.2\arpe_v2\.venv_build\Scripts\python.exe · pasta=C:\Users\zonaa\Downloads\arpe_relatorios_v2.3.2\arpe_v2 · rede=False · dados=C:\Users\zonaa\Downloads\arpe_relatorios_v2.3.2\arpe_v2
+[2026-11-05 10:32:29] carga da planilha: C:\Users\zonaa\Downloads\Acomp fisc TO 2026 Final.xlsx
+[2026-11-05 10:32:29] servidor local em http://127.0.0.1:64884/ (a planilha carrega em segundo plano)
+[2026-11-05 10:32:29] pywebview ? importado
+[2026-11-05 10:32:29] abrindo janela própria (pywebview)
+[2026-11-05 10:32:32] planilha carregada em 2.9s (1756 fiscalizações, 169 NC)
+[2026-11-05 10:32:34] janela carregada
+[2026-11-05 10:32:52] encerrado

@@ -1,0 +1,12 @@
+{
+  "baseline": null,
+  "gerados": {
+    "10/2026": {
+      "gerado_em": "2026-11-04T10:10:50",
+      "arquivo": "Relatorio_Fiscalizacao_2026-10.docx"
+    }
+  },
+  "alertas_dispensados": [
+    "Nome completo não cadastrado (aparece só o primeiro nome na capa): Aldo, Tiago, Argemerido, Bruno, Demetrios, Argemeiro, Domingos. Cadastre em Configurações › Assinantes."
+  ]
+}

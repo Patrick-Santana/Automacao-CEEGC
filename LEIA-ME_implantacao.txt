@@ -1,0 +1,20 @@
+ARPE · Relatórios de Fiscalização 2.3 — implantação em pasta de rede
+====================================================================
+1. Copie a pasta ARPE_Relatorios INTEIRA (o .exe e a subpasta _internal juntos) para o servidor, ex.: \\servidor2\gas$\ARPE_Relatorios
+   Não copie só o .exe: ele depende da pasta _internal.
+2. Coloque ao lado do .exe: DadosFiscalização.xlsx (ou use "Abrir planilha..." no programa), metas_municipios.csv e a pasta assets.
+3. Em cada computador: execute criar_atalho.bat (ou, dentro do programa, Relatórios › Configurações › Criar atalho).
+   O atalho usa o caminho \\servidor2\gas$\... (e não a letra Y:), que funciona em qualquer sessão.
+4. Abrir o programa: pelo atalho ou clicando no .exe. De pasta de rede ele abre no navegador padrão; ao fechar a aba, encerra sozinho.
+   (Do disco local abre em janela própria. Para forçar: ARPE_Relatorios.exe --janela / --navegador.)
+
+Onde ficam os dados
+- config.json, estado dos relatórios gerados e arpe_log.txt: pasta do usuário (%LOCALAPPDATA%\ARPE_Relatorios) quando o programa roda da rede;
+  assim cada analista tem o seu histórico e não há conflito de gravação. Para uma pasta compartilhada: defina a variável de ambiente ARPE_DADOS.
+- Relatórios gerados (.docx): pasta "saida" ao lado do programa (altere em Configurações).
+
+Se o programa não abrir
+- Ele mostra uma janela de erro e grava o motivo em %LOCALAPPDATA%\ARPE_Relatorios\arpe_log.txt (e arpe_crash.txt) — envie esses arquivos.
+- Windows protegeu o computador / bloqueou: clique com o botão direito no .exe › Propriedades › marque "Desbloquear" (se aparecer),
+  ou peça à TI para incluir \\servidor2 na zona "Intranet local" / liberar o executável no antivírus.
+- Para ver erros no console, gere a versão de teste: build_exe.bat debug.
